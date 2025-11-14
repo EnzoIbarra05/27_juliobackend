@@ -1,0 +1,23 @@
+# Archivos y carpetas de Gradle
+.gradle/
+build/
+
+# Archivos de IntelliJ IDEA
+.idea/
+*.iml
+
+# Archivos de configuración local
+out/
+bin/
+
+# Archivos de logs
+*.log
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos temporales
+*.tmp
+*.swp
+

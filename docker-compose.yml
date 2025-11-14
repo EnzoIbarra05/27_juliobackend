@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  app_27:
+    build: 27dejulio-backend
+    mem_limit: 512m
+    ports:
+      - "8080:8080"
+    environment:
+      DB_URL: jdbc:mysql://27_dejulio:3306/27dejulio?createDatabaseIfNotExist=true&serverTimezone=UTC
+      DB_USER: root
+      DB_PASSWORD: 1234 
+    restart: always
+    depends_on:
+      27_dejulio:
+          condition: service_healthy
+  27_dejulio:
+    image: mysql:8.0.33 
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_PASSWORD: 1234
+      MYSQL_DATABASE: 27dejulio
+    restart: always
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 10

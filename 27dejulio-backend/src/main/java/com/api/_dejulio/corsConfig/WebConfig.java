@@ -11,10 +11,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
             .allowedOrigins(
-                "https://27dejulio.com",
-                "https://www.27dejulio.com",
                 "https://27dejulioapi.com",
-                "https://www.27dejulioapi.com",
                 "https://a0041148.ferozo.com"   // <--- tu frontend actual
             )
             .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")

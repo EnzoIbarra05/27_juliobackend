@@ -15,7 +15,7 @@ public class WebConfig implements WebMvcConfigurer {
                 "https://www.27dejulio.com",
                 "https://27dejulioapi.com",
                 "https://www.27dejulioapi.com",
-                "https://a0041148.ferozo.com"   // <--- tu frontend actual
+                "https://a0041148.ferozo.com"
             )
             .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
             .allowedHeaders("*")

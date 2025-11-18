@@ -28,24 +28,25 @@ public class SecurityConfig {
         return http.build();
     }
 
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration config = new CorsConfiguration();
+@Bean
+public CorsConfigurationSource corsConfigurationSource() {
+    CorsConfiguration config = new CorsConfiguration();
 
-        config.setAllowedOrigins(List.of(
-            "https://27dejulio.com",
-            "https://www.27dejulio.com",
-            "https://27dejulioapi.com",
-            "https://www.27dejulioapi.com",
-            "https://a0041148.ferozo.com"
-        ));
+    // Origen exacto de tu frontend
+    config.setAllowedOrigins(List.of("https://a0041148.ferozo.com"));
 
-        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        config.setAllowedHeaders(List.of("*"));
-        config.setAllowCredentials(true);
+    // Métodos HTTP permitidos
+    config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", config);
-        return source;
-    }
+    // Headers permitidos
+    config.setAllowedHeaders(List.of("*"));
+
+    // Necesario para enviar cookies o tokens de sesión
+    config.setAllowCredentials(true);
+
+    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    source.registerCorsConfiguration("/**", config);
+    return source;
+}
+
 }

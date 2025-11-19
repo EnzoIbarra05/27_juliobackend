@@ -28,25 +28,27 @@ public class SecurityConfig {
 
         return http.build();
     }
-
 @Bean
 public CorsConfigurationSource corsConfigurationSource() {
     CorsConfiguration config = new CorsConfiguration();
 
-    config.setAllowedOrigins(List.of(
-            "https://a0041148.ferozo.com",     // frontend hosteado
-            "https://27dejulioapi.com",        // backend domain
-            "https://www.27dejulioapi.com"     // backend www
-    ));
+    // Dominio EXACTO de tu frontend
+    config.setAllowedOrigins(List.of("https://a0041148.ferozo.com"));
 
     config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
     config.setAllowedHeaders(List.of("*"));
+
+    // Si usás cookies o Authorization -> true
     config.setAllowCredentials(true);
+
+    // Evita el "Invalid CORS request"
+    config.setExposedHeaders(List.of("Authorization", "Content-Type"));
 
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     source.registerCorsConfiguration("/**", config);
     return source;
 }
+
 
 
 }

@@ -29,29 +29,24 @@ public class SecurityConfig {
         return http.build();
     }
 
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration config = new CorsConfiguration();
+@Bean
+public CorsConfigurationSource corsConfigurationSource() {
+    CorsConfiguration config = new CorsConfiguration();
 
-        // Dominio exacto del frontend
-        config.setAllowedOrigins(List.of("https://a0041148.ferozo.com"));
+    // Permitir tu dominio exacto (HTTPS)
+    config.setAllowedOriginPatterns(List.of("https://a0041148.ferozo.com"));
 
-        // Patrón compatible con navegadores modernos
-        config.setAllowedOriginPatterns(List.of("https://a0041148.ferozo.com"));
+    config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+    config.setAllowedHeaders(List.of("*"));
 
-        // Métodos permitidos
-        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+    // Muy importante para evitar "Invalid CORS request"
+    config.setAllowCredentials(true);
+    config.setExposedHeaders(List.of("Authorization"));
 
-        // Headers permitidos
-        config.setAllowedHeaders(List.of("*"));
+    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    source.registerCorsConfiguration("/**", config);
+    return source;
+}
 
-        // Permite credenciales (cookies, auth headers)
-        config.setAllowCredentials(true);
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", config);
-
-        return source;
-    }
 }
 

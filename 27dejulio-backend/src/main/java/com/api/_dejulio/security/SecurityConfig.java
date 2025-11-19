@@ -33,20 +33,21 @@ public class SecurityConfig {
 public CorsConfigurationSource corsConfigurationSource() {
     CorsConfiguration config = new CorsConfiguration();
 
-    // Permitir tu dominio exacto (HTTPS)
-    config.setAllowedOriginPatterns(List.of("https://a0041148.ferozo.com"));
+    config.setAllowedOrigins(List.of(
+            "https://a0041148.ferozo.com",     // frontend hosteado
+            "https://27dejulioapi.com",        // backend domain
+            "https://www.27dejulioapi.com"     // backend www
+    ));
 
     config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
     config.setAllowedHeaders(List.of("*"));
-
-    // Muy importante para evitar "Invalid CORS request"
     config.setAllowCredentials(true);
-    config.setExposedHeaders(List.of("Authorization"));
 
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     source.registerCorsConfiguration("/**", config);
     return source;
 }
+
 
 }
 

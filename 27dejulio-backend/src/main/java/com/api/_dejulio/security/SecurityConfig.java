@@ -18,11 +18,12 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
         http
-            .csrf(csrf -> csrf.disable())       // Deshabilitar CSRF
-            .cors(Customizer.withDefaults())    // Habilitar CORS
+            .csrf(csrf -> csrf.disable())      // Deshabilitar CSRF
+            .cors(Customizer.withDefaults())   // Habilitar CORS
             .authorizeHttpRequests(auth -> auth
-                .anyRequest().permitAll()       // Permitir todas las solicitudes
+                .anyRequest().permitAll()      // Permitir todas las solicitudes
             );
 
         return http.build();
@@ -32,20 +33,25 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
 
-        // Origen exacto de tu frontend
+        // Dominio exacto del frontend
         config.setAllowedOrigins(List.of("https://a0041148.ferozo.com"));
 
-        // Métodos HTTP permitidos
+        // Patrón compatible con navegadores modernos
+        config.setAllowedOriginPatterns(List.of("https://a0041148.ferozo.com"));
+
+        // Métodos permitidos
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 
         // Headers permitidos
         config.setAllowedHeaders(List.of("*"));
 
-        // Permitir credenciales (cookies, headers de auth, etc.)
+        // Permite credenciales (cookies, auth headers)
         config.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
+
         return source;
     }
 }
+

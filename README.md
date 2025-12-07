@@ -83,3 +83,8 @@ ARG JAR_FILE=target/27dejulio_srl-0.0.1.jar
 COPY ${JAR_FILE} app_27dejulio.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app_27dejulio.jar"]
+```
+---
+[![Ver video](https://img.youtube.com/vi/CkTQhXJ32TM/0.jpg)](https://www.youtube.com/watch?v=CkTQhXJ32TM)
+
+
